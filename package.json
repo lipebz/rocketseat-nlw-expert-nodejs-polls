@@ -5,6 +5,7 @@
   "main": "index.js",
   "devDependencies": {
     "@types/node": "^20.11.17",
+    "prisma": "^5.9.1",
     "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   },
@@ -15,6 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^4.26.0"
+    "@prisma/client": "^5.9.1",
+    "fastify": "^4.26.0",
+    "zod": "^3.22.4"
   }
 }
