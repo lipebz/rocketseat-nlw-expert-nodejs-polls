@@ -1,0 +1,49 @@
+version: '3.7'
+
+services:
+  node:
+    build:
+      context: .
+      target: development
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    stdin_open: true
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    networks:
+      - app-default
+  postgres:
+    image: bitnami/postgresql:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=polls
+    volumes:
+      - polls_pg_data:/bitnami/postgresql
+    networks:
+      - app-default
+
+  redis:
+    image: bitnami/redis:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'polls_redis_data:/bitnami/redis/data'
+    networks:
+      - app-default
+
+
+networks:
+  app-default:
+
+volumes:
+  polls_pg_data:
+  polls_redis_data:
